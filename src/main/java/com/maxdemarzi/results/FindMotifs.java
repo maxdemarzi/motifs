@@ -73,10 +73,29 @@ public class FindMotifs implements Runnable {
                     "RETURN COUNT(*) AS count");
         }};
 
+        ArrayList<String> m4_3 = new ArrayList<String>(){{
+            add("m4_3");
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
+                    "WHERE ID(r1) = $rel_id " +
+                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                    "RETURN COUNT(*) AS count");
+
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
+                    "WHERE ID(r2) = $rel_id " +
+                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                    "RETURN COUNT(*) AS count");
+
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
+                    "WHERE ID(r3) = $rel_id " +
+                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                    "RETURN COUNT(*) AS count");
+        }};
+
         patterns.add(m3_1);
         patterns.add(m3_2);
         patterns.add(m4_1);
         patterns.add(m4_2);
+        patterns.add(m4_3);
     }
 
     @Override
