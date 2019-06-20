@@ -63,40 +63,54 @@ public class FindMotifs implements Runnable {
         ArrayList<String> m4_2 = new ArrayList<String>(){{
             add("m4_2");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3), (p2)-[r3]-(p4) " +
-                    "WHERE ID(r1) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
 
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3), (p2)-[r3]-(p4) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r3) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
         }};
 
         ArrayList<String> m4_3 = new ArrayList<String>(){{
             add("m4_3");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                    "WHERE ID(r1) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
 
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r2) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
 
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r3) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
         }};
 
         ArrayList<String> m4_4 = new ArrayList<String>(){{
             add("m4_4");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1) " +
-                    "WHERE ID(r1) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
+        }};
+
+        ArrayList<String> m4_5 = new ArrayList<String>(){{
+            add("m4_5");
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4) " +
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
+
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4) " +
+                "WHERE ID(r5) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
+                "RETURN COUNT(*) AS count");
+
         }};
 
         patterns.add(m3_1);
@@ -105,6 +119,7 @@ public class FindMotifs implements Runnable {
         patterns.add(m4_2);
         patterns.add(m4_3);
         patterns.add(m4_4);
+        patterns.add(m4_5);
     }
 
     @Override
