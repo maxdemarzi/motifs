@@ -7,7 +7,6 @@ import org.neo4j.logging.Log;
 import org.neo4j.procedure.*;
 import org.roaringbitmap.longlong.Roaring64NavigableMap;
 
-import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
