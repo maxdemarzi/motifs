@@ -231,6 +231,38 @@ public class FindMotifs implements Runnable {
                 "RETURN [ID(r1), ID(r2), ID(r3), ID(r4)] AS relationships");
         }};
 
+        ArrayList<String> m5_18 = new ArrayList<String>(){{
+            add("m5_18");
+            add("MATCH (p1)-[r1]-(p4)-[r2]-(p2), (p5)-[r3]-(p4)-[r4]-(p3) " +
+                "WHERE ID(r1) = $rel_id  " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4)] AS relationships");
+        }};
+
+        ArrayList<String> m5_19 = new ArrayList<String>(){{
+            add("m5_19");
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p4)-[r3]-(p3), (p4)-[r4]-(p5) " +
+                "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id OR ID(r4) = $rel_id ) " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4)] AS relationships");
+        }};
+
+        ArrayList<String> m5_20 = new ArrayList<String>(){{
+            add("m5_20");
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p1) " +
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5)] AS relationships");
+        }};
+
+        ArrayList<String> m5_21 = new ArrayList<String>(){{
+            add("m5_21");
+            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3)-[r7]-(p5)-[r8]-(p2)-[r9]-(p4)-[r10]-(p1) " +
+                "WHERE ID(r1) = $rel_id " +
+                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7), ID(r8), ID(r9), ID(r10)] AS relationships");
+        }};
+
         patterns.add(m3_1);
         patterns.add(m3_2);
         patterns.add(m4_1);
@@ -255,7 +287,11 @@ public class FindMotifs implements Runnable {
         patterns.add(m5_14);
         patterns.add(m5_15);
         patterns.add(m5_16);
-
+        patterns.add(m5_17);
+        patterns.add(m5_18);
+        patterns.add(m5_19);
+        patterns.add(m5_20);
+        patterns.add(m5_21);
     }
 
     @Override
