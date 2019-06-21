@@ -36,7 +36,7 @@ public class FindMotifs implements Runnable {
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3) " +
                 "WHERE ID(r1) = $rel_id " +
                 "AND p1 <> p2 AND p1 <> p3 AND p2 <> p3 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2)] AS relationships");
         }};
 
         ArrayList<String> m3_2 = new ArrayList<String>(){{
@@ -44,51 +44,31 @@ public class FindMotifs implements Runnable {
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p1) " +
                 "WHERE ID(r1) = $rel_id " +
                 "AND p1 <> p2 AND p1 <> p3 AND p2 <> p3 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2), ID(r3)] AS relationships");
         }};
 
         ArrayList<String> m4_1 = new ArrayList<String>(){{
             add("m4_1");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4) " +
-                "WHERE ID(r1) = $rel_id " +
+                "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id ) " +
                 "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4) " +
-                "WHERE ID(r2) = $rel_id " +
-                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2), ID(r3)] AS relationships");
         }};
 
         ArrayList<String> m4_2 = new ArrayList<String>(){{
             add("m4_2");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3), (p2)-[r3]-(p4) " +
-                "WHERE ID(r1) = $rel_id " +
+                "WHERE ( ID(r1) = $rel_id OR ID(r3) = $rel_id ) " +
                 "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3), (p2)-[r3]-(p4) " +
-                "WHERE ID(r3) = $rel_id " +
-                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2), ID(r3)] AS relationships");
         }};
 
         ArrayList<String> m4_3 = new ArrayList<String>(){{
             add("m4_3");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                "WHERE ID(r1) = $rel_id " +
+                "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id ) " +
                 "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                "WHERE ID(r2) = $rel_id " +
-                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p2) " +
-                "WHERE ID(r3) = $rel_id " +
-                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4)] AS relationships");
         }};
 
         ArrayList<String> m4_4 = new ArrayList<String>(){{
@@ -96,205 +76,79 @@ public class FindMotifs implements Runnable {
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1) " +
                 "WHERE ID(r1) = $rel_id " +
                 "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4)] AS relationships");
         }};
 
         ArrayList<String> m4_5 = new ArrayList<String>(){{
             add("m4_5");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4) " +
-                "WHERE ID(r1) = $rel_id " +
+                "WHERE ( ID(r1) = $rel_id OR ID(r5) = $rel_id ) " +
                 "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4) " +
-                "WHERE ID(r5) = $rel_id " +
-                "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                "RETURN COUNT(*) AS count");
-
+                "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5)] AS relationships");
         }};
 
         ArrayList<String> m4_6 = new ArrayList<String>(){{
             add("m4_6");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4), (p1)-[r6]-(p3) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r5) = $rel_id OR ID(r6) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4), (p1)-[r6]-(p3) " +
-                    "WHERE ID(r5) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p1), (p2)-[r5]-(p4), (p1)-[r6]-(p3) " +
-                    "WHERE ID(r6) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p2 <> p3 AND p2 <> p4 AND p3 <> p4 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6)] AS relationships");
         }};
 
         ArrayList<String> m5_1 = new ArrayList<String>(){{
             add("m5_1");
             add("MATCH (p1)-[r1]-(p3)-[r2]-(p5)-[r3]-(p1), (p2)-[r4]-(p3)-[r5]-(p4)-[r6]-(p5)-[r7]-(p2) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r4) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p3)-[r2]-(p5)-[r3]-(p1), (p2)-[r4]-(p3)-[r5]-(p4)-[r6]-(p5)-[r7]-(p2) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p3)-[r2]-(p5)-[r3]-(p1), (p2)-[r4]-(p3)-[r5]-(p4)-[r6]-(p5)-[r7]-(p2) " +
-                    "WHERE ID(r4) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7)] AS relationships");
         }};
 
         ArrayList<String> m5_2 = new ArrayList<String>(){{
             add("m5_2");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id OR ID(r4) = $rel_id OR ID(r5) = $rel_id OR ID(r6) = $rel_id) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r4) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r5) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1) " +
-                    "WHERE ID(r6) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6)] AS relationships");
         }};
 
         ArrayList<String> m5_3 = new ArrayList<String>(){{
             add("m5_3");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id OR ID(r4) = $rel_id OR ID(r5) = $rel_id OR ID(r6) = $rel_id) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r4) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r5) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4), (p3)-[r4]-(p5)-[r5]-(p1)-[r6]-(p3) " +
-                    "WHERE ID(r6) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6)] AS relationships");
         }};
 
         ArrayList<String> m5_4 = new ArrayList<String>(){{
             add("m5_4");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p1)-[r6]-(p4)-[r7]-(p2) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p1)-[r6]-(p4)-[r7]-(p2) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p1)-[r6]-(p4)-[r7]-(p2) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7)] AS relationships");
         }};
 
         ArrayList<String> m5_5 = new ArrayList<String>(){{
             add("m5_5");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5), (p3)-[r5]-(p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r5) = $rel_id OR ID(r6) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5), (p3)-[r5]-(p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5), (p3)-[r5]-(p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r5) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5), (p3)-[r5]-(p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r6) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7)] AS relationships");
         }};
 
         ArrayList<String> m5_6 = new ArrayList<String>(){{
             add("m5_6");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p3)-[r6]-(p5)-[r7]-(p1)-[r8]-(p3) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id OR ID(r6) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p3)-[r6]-(p5)-[r7]-(p1)-[r8]-(p3) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p3)-[r6]-(p5)-[r7]-(p1)-[r8]-(p3) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p3)-[r6]-(p5)-[r7]-(p1)-[r8]-(p3) " +
-                    "WHERE ID(r6) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7), ID(r8)] AS relationships");
         }};
 
         ArrayList<String> m5_7 = new ArrayList<String>(){{
             add("m5_7");
             add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r1) = $rel_id " +
+                    "WHERE ( ID(r1) = $rel_id OR ID(r2) = $rel_id OR ID(r3) = $rel_id ) " +
                     "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r2) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
-
-            add("MATCH (p1)-[r1]-(p2)-[r2]-(p3)-[r3]-(p4)-[r4]-(p5)-[r5]-(p2), (p5)-[r6]-(p1)-[r7]-(p3) " +
-                    "WHERE ID(r3) = $rel_id " +
-                    "AND p1 <> p2 AND p1 <> p3 AND p1 <> p4 AND p1 <> p5 AND p2 <> p3 AND p2 <> p4 AND p2 <> p5 AND p3 <> p4 AND p3 <> p5 AND p4 <> p5 " +
-                    "RETURN COUNT(*) AS count");
+                    "RETURN [ID(r1), ID(r2), ID(r3), ID(r4), ID(r5), ID(r6), ID(r7)] AS relationships");
         }};
 
         patterns.add(m3_1);
@@ -331,6 +185,8 @@ public class FindMotifs implements Runnable {
 
             try(Transaction tx = db.beginTx()) {
                 Map<String, Object> parameters = new HashMap<>();
+                Result result;
+                List<Long> relationships;
 
                 while (relIds.hasNext()) {
                     long relId = relIds.next();
@@ -341,12 +197,26 @@ public class FindMotifs implements Runnable {
                     parameters.put("rel_id", relId);
 
                     for (ArrayList<String> pattern : patterns) {
-                        Long count = 0L;
+                        Set<List<Long>> allRelationships = new HashSet<>();
                         for (String motif : pattern.subList(1, pattern.size())) {
-                            count += (Long)db.execute(motif, parameters).next().get("count");
-                        }
 
-                        csvAppender.appendField(String.valueOf(count));
+                            result = db.execute(motif, parameters);
+
+                            while (result.hasNext()) {
+                                boolean unique = true;
+                                relationships = (List<Long>)result.next().get("relationships");
+
+                                for (List<Long> rels : allRelationships) {
+                                    if (rels.containsAll(relationships)) {
+                                        unique = false;
+                                        break; };
+                                }
+                                if (unique) {
+                                    allRelationships.add(relationships);
+                                }
+                            }
+                            csvAppender.appendField(String.valueOf(allRelationships.size()));
+                        }
                     }
 
                     csvAppender.endLine();
