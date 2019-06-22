@@ -46,7 +46,6 @@ public class Procedures {
                 rels[index.incrementAndGet() % threads].add(r.getId());
             }
         }
-
         for (int i = 0; i < threads; i++) {
             service.execute(new FindMotifs(db, log, rels[i], i, path));
         }
