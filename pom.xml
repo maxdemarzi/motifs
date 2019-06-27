@@ -44,6 +44,18 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- This gives us compile-time sanity checks on the procedure(s)
+             this project includes.
+             It is marked `optional` because it concerns only the current
+             project compilation and should not be fetched if this project
+             is used a dependency. -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>procedure-compiler</artifactId>
+            <version>${neo4j.version}</version>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <!-- This is used for a utility that lets us start Neo4j with
